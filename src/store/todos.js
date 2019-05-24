@@ -10,15 +10,13 @@ const getters = {
 
 const actions = {
   async fetchTodos({ commit }) {
-    const mytrue = true;
-    if (mytrue) {
-      commit("setTodos", todos);
+    let response;
+    if (process.env.NODE_ENV === "development") {
+      response = { data: todos };
     } else {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
-      commit("setTodos", response.data);
+      response = await axios.get("https://jsonplaceholder.typicode.com/todos");
     }
+    commit("setTodos", response.data);
   }
 };
 
