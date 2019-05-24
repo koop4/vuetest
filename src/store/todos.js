@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import todos from "../mock/todos";
 const state = {
   todos: []
 };
@@ -10,10 +10,15 @@ const getters = {
 
 const actions = {
   async fetchTodos({ commit }) {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos"
-    );
-    commit("setTodos", response.data);
+    const mytrue = true;
+    if (mytrue) {
+      commit("setTodos", todos);
+    } else {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/todos"
+      );
+      commit("setTodos", response.data);
+    }
   }
 };
 
